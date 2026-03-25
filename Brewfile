@@ -1,5 +1,4 @@
 # Taps
-tap "homebrew/bundle"
 tap "grega/tap"
 
 # Formulae
@@ -17,6 +16,7 @@ brew "rsync"
 brew "syncthing"
 brew "tmux"
 brew "wget"
+brew "dockutil"
 
 # Casks
 cask "ghostty"
@@ -35,3 +35,4 @@ cask "cyberduck"
 cask "firefox"
 cask "github"
 cask "karabiner-elements"
+cask "obsidian"

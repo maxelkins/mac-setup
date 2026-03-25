@@ -10,9 +10,15 @@ for file in "$DOTFILES_DIR"/.*; do
   name=$(basename "$file")
   [[ "$name" == "." || "$name" == ".." ]] && continue
 
+
   if [ -f "$HOME/$name" ] && [ ! -L "$HOME/$name" ]; then
-    echo "    Backing up $HOME/$name → $HOME/${name}.bak"
-    mv "$HOME/$name" "$HOME/${name}.bak"
+    backup_file="$HOME/${name}.bak"
+    if [ -e "$backup_file" ]; then
+      timestamp=$(date +%Y%m%d%H%M%S)
+      backup_file="$HOME/${name}.bak.$timestamp"
+    fi
+    echo "    Backing up $HOME/$name → $backup_file"
+    mv "$HOME/$name" "$backup_file"
   fi
 
   ln -sf "$file" "$HOME/$name"
@@ -28,8 +34,13 @@ if [ -d "$DOTFILES_DIR/config" ]; then
     target="$HOME/.config/$name"
 
     if [ -d "$target" ] && [ ! -L "$target" ]; then
-      echo "    Backing up $target → ${target}.bak"
-      mv "$target" "${target}.bak"
+      backup_dir="${target}.bak"
+      if [ -e "$backup_dir" ]; then
+        timestamp=$(date +%Y%m%d%H%M%S)
+        backup_dir="${target}.bak.$timestamp"
+      fi
+      echo "    Backing up $target → $backup_dir"
+      mv "$target" "$backup_dir"
     fi
 
     cp -R "$dir" "$target"
@@ -46,8 +57,13 @@ if [ -d "$LIBRARY_APP_SUPPORT" ]; then
     target="$HOME/Library/Application Support/$name"
 
     if [ -d "$target" ] && [ ! -L "$target" ]; then
-      echo "    Backing up $target → ${target}.bak"
-      mv "$target" "${target}.bak"
+      backup_dir="${target}.bak"
+      if [ -e "$backup_dir" ]; then
+        timestamp=$(date +%Y%m%d%H%M%S)
+        backup_dir="${target}.bak.$timestamp"
+      fi
+      echo "    Backing up $target → $backup_dir"
+      mv "$target" "$backup_dir"
     fi
 
     cp -R "$dir" "$target"

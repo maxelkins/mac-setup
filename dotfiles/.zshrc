@@ -19,6 +19,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Add Homebrew's executable directory to the front of the PATH
 export PATH=/opt/homebrew/bin:$PATH
+export HOMEBREW_NO_ENV_HINTS=1
 
 # Aliases
 alias gl='git log --graph --oneline'

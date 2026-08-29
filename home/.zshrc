@@ -90,4 +90,4 @@ add-zsh-hook preexec _starship_blank_line_preexec
 add-zsh-hook precmd _starship_blank_line_precmd
 
 # Load 1Password shell plugins, including secure GitHub CLI authentication.
-source "$HOME/.config/op/plugins.sh"
+[[ -f "$HOME/.config/op/plugins.sh" ]] && source "$HOME/.config/op/plugins.sh"
